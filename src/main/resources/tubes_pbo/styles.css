@@ -1,0 +1,248 @@
+/* Global */
+:root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial;
+    -fx-base: #fff;
+}
+
+/* Header and top area styles */
+.header {
+    -fx-background-color: white;
+    -fx-alignment: center-left;
+    -fx-padding: 12 24 12 24;
+    -fx-border-color: transparent transparent #efe6df transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.logo {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #3b2b24;
+}
+.nav .nav-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #6a4b3a;
+}
+.nav-button.active {
+    -fx-background-color: #8b4f2b;
+    -fx-text-fill: white;
+    -fx-background-radius: 16;
+    -fx-padding: 6 14 6 14;
+}
+
+/* header right controls */
+.header-search {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-border-color: rgba(0, 0, 0, 0.5);
+}
+.header-search TextField {
+    -fx-background-radius: 20;
+    -fx-padding: 8 12 8 12; /* restored original padding */
+    -fx-background-color: #f6f2ef;
+    -fx-border-color: rgba(0, 0, 0, 0.5);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);
+}
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 15px;
+}
+.cart-label {
+    -fx-padding: 0 0 0 12;
+    -fx-font-weight: 600;
+    -fx-text-fill: #3b2b24;
+}
+
+/* Hero */
+.hero {
+    -fx-background-color: linear-gradient(to bottom right, rgba(122,75,43,0.95), rgba(192,138,90,0.95));
+    -fx-min-height: 300px;
+    -fx-background-radius: 0;
+    -fx-alignment: center-left;
+}
+.hero-content {
+    -fx-padding: 30 48 30 48;
+}
+.hero-badge {
+    -fx-background-color: rgba(233,199,123,0.95);
+    -fx-padding: 6 12 6 12;
+    -fx-background-radius: 14;
+    -fx-text-fill: #4b2f20;
+    -fx-font-weight: 600;
+}
+.hero-title {
+    -fx-font-size: 40px;
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+    -fx-padding: 6 0 6 0;
+}
+.hero-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.95);
+    -fx-font-size: 14px;
+    -fx-padding: 0 0 12 0;
+}
+.cta-button {
+    -fx-background-color: #d07b3e;
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
+    -fx-padding: 8 16 8 16;
+    -fx-font-weight: 600;
+}
+
+/* Vertical hero on the left of the content area */
+.hero-vertical {
+    -fx-background-color: linear-gradient(to bottom right, rgba(122,75,43,0.95), rgba(192,138,90,0.95));
+    -fx-min-width: 320px;
+    -fx-padding: 32 22 32 32;
+    -fx-alignment: top-left;
+}
+.hero-content-vertical {
+    -fx-padding: 8 6 8 6;
+}
+.hero-title-vertical {
+    -fx-font-size: 28px;
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+    -fx-wrap-text: true;
+}
+.hero-subtitle-vertical {
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-font-size: 12px;
+    -fx-padding: 8 0 16 0;
+}
+
+/* Collection header */
+.collection-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #3b2b24;
+}
+.collection-sub {
+    -fx-text-fill: #7a6b65;
+}
+.collection-search TextField {
+    -fx-background-radius: 20;
+    -fx-padding: 8 12 8 12; /* restored original padding */
+    -fx-background-color: #f6f2ef;
+    -fx-border-color: rgba(0,0,0,0.06);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, 0, 2);
+}
+
+/* stronger visible stroke when focused */
+.collection-search TextField:focused, .header-search TextField:focused {
+    -fx-border-color: rgba(208,123,62,0.95); /* accent color */
+    -fx-border-width: 2;
+}
+
+/* Search icon placed over the TextField inside a StackPane */
+/* removed embedded search icon styles */
+    /* Filters sidebar */
+    .filters {
+        -fx-pref-width: 260px;
+        -fx-min-width: 260px;
+        -fx-max-width: 260px;
+        -fx-padding: 8 12 30 12;
+        -fx-background-color: #fbf9f7;
+        -fx-border-color: transparent transparent transparent rgba(0,0,0,0.02);
+    }
+    .filter-title {
+        -fx-font-weight: 700;
+        -fx-text-fill: #3b2b24;
+        -fx-padding: 6 0 6 0;
+    }
+    .slider-placeholder {
+        -fx-background-color: linear-gradient(to right, #8b4f2b, #d07b3e);
+        -fx-text-fill: white;
+        -fx-background-radius: 12;
+        -fx-padding: 6 12 6 12;
+    }
+
+    /* small tag/chip style used under product cards */
+    .chip {
+        -fx-background-color: rgba(215,170,120,0.15);
+        -fx-text-fill: #7a5a3e;
+        -fx-padding: 4 8 4 8;
+        -fx-background-radius: 12;
+        -fx-font-size: 11px;
+    }
+
+    .product-grid {
+        -fx-padding: 8 12 8 12;
+    }
+
+    /* Narrower scrollbar for the products area */
+    ScrollPane .viewport .scroll-bar:vertical {
+        -fx-pref-width: 12px;
+    }
+    ScrollBar .thumb {
+        -fx-background-color: rgba(120,75,40,0.25);
+        -fx-background-radius: 6;
+    }
+
+/* Product cards and footer */
+.product-card {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-border-color: #eee;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+    -fx-pref-width: 550;
+    -fx-spacing: 10;
+}
+.product-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 12, 0, 0, 4);
+    -fx-translate-y: -3;
+}
+.product-title { -fx-font-weight: 700; -fx-font-size: 13px; }
+.price-label { -fx-font-weight: 700; -fx-text-fill: #b76b22; }
+.add-button { -fx-background-color: #d6a46b; -fx-text-fill: white; -fx-background-radius: 6; }
+.footer { -fx-background-color: #faf7f3; -fx-padding: 18; }
+
+/* Footer styles */
+.footer-main {
+    -fx-background-color: #faf7f3;
+}
+.footer-top {
+    -fx-padding: 24 8 24 8;
+}
+.footer-left .footer-logo {
+    -fx-background-color: #7a3f20;
+    -fx-text-fill: white;
+    -fx-padding: 10 12;
+    -fx-background-radius: 999;
+    -fx-font-weight: 700;
+}
+.footer-title {
+    -fx-font-weight: 700;
+    -fx-padding: 0 0 0 6;
+}
+.footer-right .subscribe-field {
+    -fx-background-radius: 8;
+    -fx-background-color: #f4efe9;
+    -fx-padding: 8 10 8 10;
+}
+.subscribe-button {
+    -fx-background-color: #eacb7a;
+    -fx-text-fill: #6b3f24;
+    -fx-background-radius: 8;
+    -fx-padding: 8 18 8 18;
+}
+.footer-accept-title { -fx-padding: 8 0 6 0; -fx-font-weight: 700; }
+.accept-grid { -fx-padding: 6 0 0 0; }
+.accept-box {
+    -fx-background-color: white;
+    -fx-padding: 14 20;
+    -fx-background-radius: 6;
+    -fx-alignment: center;
+}
+.footer-bottom {
+    -fx-padding: 14 8 6 8;
+    -fx-border-color: transparent transparent rgba(0,0,0,0.04) transparent;
+    -fx-border-width: 1 0 0 0;
+}

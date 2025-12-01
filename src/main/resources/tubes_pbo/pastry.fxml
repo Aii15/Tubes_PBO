@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tubes_pbo.PastryController">
+    <!-- Header: logo, nav, header-search, icons -->
+    <top>
+        <VBox>
+            <HBox spacing="12" styleClass="header">
+                <children>
+                    <Label text="Impactful Coffee" styleClass="logo" />
+
+                    <HBox spacing="8" styleClass="nav">
+                        <children>
+                            <Button text="Coffee" styleClass="nav-button" onAction="#goToCoffee" />
+                            <Button text="Pastry" styleClass="nav-button active" onAction="#goToPastry" />
+                            <Button text="Beverages" styleClass="nav-button" onAction="#goToBeverages" />
+                            <Button text="Side Dish" styleClass="nav-button" onAction="#goToSideDish" />
+                        </children>
+                    </HBox>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <!-- Right-aligned controls: cart only (header search removed) -->
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <children>
+                            <Button fx:id="cartButton" text="cart" styleClass="cart-label" />
+                        </children>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets top="10" bottom="10" left="18" right="18" />
+                </padding>
+            </HBox>
+
+            <!-- Collection header + search -->
+            <HBox spacing="12" styleClass="collection-head" >
+                <children>
+                    <VBox>
+                        <children>
+                            <Label text="Premium Pastry Collection" styleClass="collection-title" />
+                            <Label text="Discover our freshly baked pastries" styleClass="collection-sub" />
+                        </children>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <HBox spacing="6" styleClass="collection-search">
+                        <children>
+                            <TextField fx:id="collectionSearch" promptText="Search pastries, flavors..." onKeyReleased="#onSearch" prefWidth="360" />
+                        </children>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets top="18" bottom="18" left="18" right="18" />
+                </padding>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="18">
+            <children>
+                <VBox styleClass="hero-vertical" prefWidth="360">
+                    <children>
+                        <VBox spacing="10" styleClass="hero-content-vertical">
+                            <children>
+                                <Label text="Artisan Crafted" styleClass="hero-badge" />
+                                <Label text="Baked Fresh Everyday" styleClass="hero-title-vertical" />
+                                <Label text="Handmade pastries crafted daily by our bakers" styleClass="hero-subtitle-vertical" wrapText="true" />
+                                <Button text="Explore Menu" styleClass="cta-button" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS">
+                    <content>
+                        <FlowPane fx:id="productFlow" hgap="16" vgap="18" prefWrapLength="1000" alignment="TOP_LEFT" styleClass="product-grid" />
+                    </content>
+                </ScrollPane>
+            </children>
+        </HBox>
+    </center>
+
+    <!-- Minimal bottom bar -->
+    <bottom>
+        <HBox spacing="8" alignment="CENTER_LEFT" styleClass="footer-bottom" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Label text="© 2025 Impactful Coffee. All Rights Reserved." />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="Contact Support" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>
