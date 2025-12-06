@@ -20,8 +20,8 @@
                     </children>
                 </HBox>
                 <HBox spacing="10">
-                    <children>
-                        <Button fx:id="addToCartBtn" text="Add to Cart" />
+                <children>
+                    <Button fx:id="addToCartBtn" text="Add to Cart" />
                     </children>
                 </HBox>
             </children>

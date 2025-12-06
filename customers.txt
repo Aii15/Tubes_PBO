@@ -1,0 +1,4 @@
+2025-12-06T16:29:50.422002300	Aii
+2025-12-06T16:32:43.885081500	Ay	12,98	Nitro Cold Brew:2
+2025-12-06T16:33:32.905808900	Ayman	26,46	Iced Tea:2,Garlic Bread:2,Butter Croissant:1,Iced Latte:2
+2025-12-06T19:41:04.368144200	Ayman	6,49	Nitro Cold Brew:1

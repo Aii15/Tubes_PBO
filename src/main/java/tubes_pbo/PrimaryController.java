@@ -62,10 +62,6 @@ public class PrimaryController extends BaseProductController {
         // Let FlowPane compute wrapping based on its layout — no sidebar binding needed.
     }
 
-    
-
-    
-
     @FXML
     private void onSearch(KeyEvent ev) {
         Object src = ev.getSource();

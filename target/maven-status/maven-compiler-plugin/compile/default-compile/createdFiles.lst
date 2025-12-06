@@ -5,6 +5,7 @@ tubes_pbo\BeveragesController.class
 tubes_pbo\OrderController.class
 tubes_pbo\CartManager$CartItem.class
 tubes_pbo\OrderController$ProductData.class
+tubes_pbo\CustomerStore.class
 module-info.class
 tubes_pbo\CartManager.class
 tubes_pbo\BaseProductController.class

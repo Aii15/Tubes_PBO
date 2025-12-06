@@ -79,7 +79,7 @@ public abstract class BaseProductController {
         Label desc = new Label("Hot Drinks");
         desc.setWrapText(true);
 
-        Label price = new Label(String.format("$%.2f", p.getPrice()));
+        Label price = new Label(String.format("Rp. %.2f", p.getPrice()));
         price.getStyleClass().add("price-label");
 
         Button add = new Button("Add to Cart");

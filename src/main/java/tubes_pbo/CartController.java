@@ -1,11 +1,10 @@
 package tubes_pbo;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.InputStream;
@@ -17,12 +16,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.TextAlignment;
-
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -51,75 +48,8 @@ public class CartController {
                 return;
             }
 
-            // show payment popup with QR and instruction
-            Stage st = new Stage();
-            st.initModality(Modality.APPLICATION_MODAL);
-            st.setTitle("Pembayaran");
-
-            HBox content = new HBox(16);
-            content.setPadding(new Insets(12));
-            content.setAlignment(Pos.CENTER);
-
-            // try to load real QR image from resources; fallback to placeholder canvas
-            javafx.scene.Node qrNode;
-            final int qrSize = 420; // larger QR size
-            try {
-                javafx.scene.image.Image img = null;
-                java.io.InputStream is = App.class.getResourceAsStream("/media/Aii qr.png");
-                if (is != null) {
-                    img = new javafx.scene.image.Image(is);
-                }
-                if (img != null && !img.isError()) {
-                    javafx.scene.image.ImageView v = new javafx.scene.image.ImageView(img);
-                    v.setFitWidth(qrSize);
-                    v.setFitHeight(qrSize);
-                    v.setPreserveRatio(true);
-                    qrNode = v;
-                } else {
-                    Canvas qr = new Canvas(qrSize, qrSize);
-                    drawPlaceholderQR(qr.getGraphicsContext2D(), (int)qr.getWidth(), (int)qr.getHeight());
-                    qrNode = qr;
-                }
-            } catch (Exception ex) {
-             
-                Canvas qr = new Canvas(qrSize, qrSize);
-                drawPlaceholderQR(qr.getGraphicsContext2D(), (int)qr.getWidth(), (int)qr.getHeight());
-                qrNode = qr;
-            }
-
-            VBox right = new VBox(12);
-            right.setAlignment(Pos.CENTER);
-            Label instr = new Label("Silakan lakukan pembayaran dengan memindai QR code di samping menggunakan aplikasi e-wallet Anda.\n\nKami juga melayani pembayaran via cash di kasir.");
-            instr.setStyle("-fx-font-size:16px; -fx-font-weight:bold;");
-            instr.setWrapText(true);
-            instr.setTextAlignment(TextAlignment.CENTER);
-            instr.setAlignment(Pos.CENTER);
-            instr.setMaxWidth(340);
-
-            Button ok = new Button("OK");
-            ok.setDefaultButton(true);
-            ok.setOnAction(okEv -> {
-                // mark payment complete and clear cart
-                CartManager.getInstance().clear();
-                refreshItems();
-                st.close();
-                try {
-                    App.setRoot("primary");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
-
-            right.getChildren().addAll(instr, ok);
-
-            content.getChildren().addAll(qrNode, right);
-
-            // set explicit scene and minimum stage size so popup appears larger
-            Scene sc = new Scene(content, qrSize + 380, Math.max(qrSize + 40, 360));
-            st.setMinWidth(qrSize + 300);
-            st.setMinHeight(qrSize + 120);
-            st.setScene(sc);
-            st.showAndWait();
+            // Show order-input popup (customer name + items summary)
+            showOrderPopup();
         });
 
         if (backButton != null) {
@@ -133,42 +63,142 @@ public class CartController {
         }
     }
 
-    private void drawPlaceholderQR(GraphicsContext g, int w, int h) {
-        // background
-        g.setFill(Color.WHITE);
-        g.fillRect(0,0,w,h);
-        // draw border
-        g.setStroke(Color.BLACK);
-        g.strokeRect(0.5,0.5,w-1,h-1);
-
-        // simple pseudo-QR: draw random-ish blocks in a grid pattern deterministically
-        g.setFill(Color.BLACK);
-        int cells = 21;
-        int cellW = Math.max(1, w / cells);
-        int cellH = Math.max(1, h / cells);
-        long seed = (w*h) ^ 0x9e3779b97f4a7c15L;
-        for (int y=0;y<cells;y++) {
-            for (int x=0;x<cells;x++) {
-                // create a repeatable pattern using simple LCG
-                seed = (seed * 6364136223846793005L + 1442695040888963407L) & 0xffffffffffffffffL;
-                if (((seed >> 8) & 1L) == 1L) {
-                    g.fillRect(x*cellW, y*cellH, cellW, cellH);
-                }
-            }
+    private void showOrderPopup() {
+        List<CartManager.CartItem> items = CartManager.getInstance().getItems();
+        // aggregate by name
+        Map<String, ItemSummary> summary = new HashMap<>();
+        for (CartManager.CartItem it : items) {
+            ItemSummary s = summary.get(it.name);
+            if (s == null) summary.put(it.name, new ItemSummary(it.name, it.price, 1));
+            else s.count++;
         }
-        // draw three finder squares
-        drawFinder(g, 1*cellW, 1*cellH, 5*cellW, 5*cellH);
-        drawFinder(g, (cells-6)*cellW, 1*cellH, 5*cellW, 5*cellH);
-        drawFinder(g, 1*cellW, (cells-6)*cellH, 5*cellW, 5*cellH);
-    }
 
-    private void drawFinder(GraphicsContext g, int x, int y, int w, int h) {
-        g.setFill(Color.WHITE);
-        g.fillRect(x-2,y-2,w+4,h+4);
-        g.setFill(Color.BLACK);
-        g.fillRect(x,y,w,h);
-        g.setFill(Color.WHITE);
-        g.fillRect(x+4,y+4,w-8,h-8);
+        Stage st = new Stage();
+        st.initModality(Modality.APPLICATION_MODAL);
+        st.setTitle("Input Nama Pemesanan");
+
+        VBox root = new VBox(12);
+        root.setPadding(new Insets(12));
+        root.setPrefWidth(920);
+
+        Label title = new Label("Detail Pesanan");
+        title.setStyle("-fx-font-size:18px; -fx-font-weight:bold;");
+
+        // list items in a scrollable area
+        VBox listBox = new VBox(8);
+        double total = 0.0;
+        for (ItemSummary s : summary.values()) {
+            HBox row = new HBox(8);
+            row.setAlignment(Pos.CENTER_LEFT);
+            Label name = new Label(s.name + "  x" + s.count);
+            name.setPrefWidth(320);
+            Label price = new Label(String.format("$%.2f", s.price * s.count));
+            price.setStyle("-fx-font-weight:bold;");
+            row.getChildren().addAll(name, price);
+            listBox.getChildren().add(row);
+                total += s.price * s.count;
+        }
+
+            // capture total in an effectively-final variable for use inside the event handler
+            final double orderTotal = total;
+
+        ScrollPane sc = new ScrollPane(listBox);
+        sc.setFitToWidth(true);
+        sc.setPrefViewportHeight(340);
+
+        // prepare QR image for the popup (placed to the right of the list)
+        ImageView qrInPopup = null;
+        try (InputStream qis = App.class.getResourceAsStream("/media/Aii qr.png")) {
+            if (qis != null) {
+                Image qimg = new Image(qis, 320, 320, true, true);
+                qrInPopup = new ImageView(qimg);
+                qrInPopup.setFitWidth(320);
+                qrInPopup.setFitHeight(320);
+                qrInPopup.setPreserveRatio(true);
+            }
+        } catch (Exception ex) {
+            // ignore — QR optional
+        }
+
+        VBox qrBox = new VBox(6);
+        qrBox.setAlignment(Pos.CENTER);
+        if (qrInPopup != null) {
+            qrBox.getChildren().add(qrInPopup);
+        } else {
+            Region placeholder = new Region();
+            placeholder.setPrefSize(320, 320);
+            qrBox.getChildren().add(placeholder);
+        }
+        Label qrLabel = new Label("Scan untuk bayar");
+        qrBox.getChildren().add(qrLabel);
+
+        HBox contentBox = new HBox(12);
+        contentBox.setAlignment(Pos.CENTER_LEFT);
+        contentBox.getChildren().addAll(sc, qrBox);
+        HBox.setHgrow(sc, Priority.ALWAYS);
+
+        // ensure stage size reflects larger content
+        st.setWidth(920);
+        st.setHeight(600);
+
+        Label totalLabel = new Label(String.format("Total: $%.2f", total));
+        totalLabel.setStyle("-fx-font-size:16px; -fx-font-weight:bold;");
+
+        HBox nameRow = new HBox(8);
+        nameRow.setAlignment(Pos.CENTER_LEFT);
+        Label nameLabel = new Label("Nama Pemesan:");
+        TextField nameField = new TextField();
+        nameField.setPrefWidth(320);
+        nameRow.getChildren().addAll(nameLabel, nameField);
+
+        HBox buttons = new HBox(8);
+        buttons.setAlignment(Pos.CENTER_RIGHT);
+        Button cancel = new Button("Batal");
+        Button confirm = new Button("Konfirmasi");
+
+        cancel.setOnAction(ev -> st.close());
+
+        confirm.setOnAction(ev -> {
+            String customer = nameField.getText().trim();
+            if (customer.isEmpty()) {
+                Alert a = new Alert(Alert.AlertType.WARNING, "Silakan masukkan nama pemesan.");
+                a.showAndWait();
+                return;
+            }
+
+            // build simple item->qty map to persist
+            java.util.Map<String, Integer> itemsMap = new java.util.LinkedHashMap<>();
+            for (ItemSummary s : summary.values()) {
+                itemsMap.put(s.name, s.count);
+            }
+
+            // persist order record (best-effort)
+            CustomerStore.addOrder(customer, itemsMap, orderTotal);
+
+            // Acknowledge order, clear cart, close popup and return to primary
+            Alert ok = new Alert(Alert.AlertType.INFORMATION);
+            ok.setTitle("Pesanan Diterima");
+            ok.setHeaderText(null);
+            ok.setContentText("Terima kasih, " + customer + ". Pesanan Anda tercatat.");
+            ok.showAndWait();
+
+            CartManager.getInstance().clear();
+            refreshItems();
+            st.close();
+            try {
+                App.setRoot("primary");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        buttons.getChildren().addAll(cancel, confirm);
+
+        root.getChildren().addAll(title, contentBox, totalLabel, nameRow, buttons);
+
+        Scene scene = new Scene(root);
+        st.setScene(scene);
+        st.showAndWait();
     }
 
     private void refreshItems() {
