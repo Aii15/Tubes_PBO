@@ -30,21 +30,21 @@ public class PastryController extends BaseProductController {
     @FXML
     public void initialize() {
         // pastry product list (name, price)
-        products.add(new Product("Butter Croissant", 2.50));
-        products.add(new Product("Almond Croissant", 3.20));
-        products.add(new Product("Pain au Chocolat", 3.00));
-        products.add(new Product("Cinnamon Roll", 2.80));
-        products.add(new Product("Blueberry Muffin", 2.40));
-        products.add(new Product("Chocolate Croissant", 3.10));
-        products.add(new Product("Danish Pastry", 2.90));
-        products.add(new Product("Scone", 2.20));
-        products.add(new Product("Banana Bread", 2.60));
-        products.add(new Product("Lemon Tart", 3.50));
-        products.add(new Product("Macaron", 2.99));
-        products.add(new Product("Éclair", 3.40));
-        products.add(new Product("Fruit Tart", 3.75));
-        products.add(new Product("Cheese Danish", 3.15));
-        products.add(new Product("Butter Cookie", 1.80));
+        products.add(new Product("Butter Croissant", 25000));
+        products.add(new Product("Almond Croissant", 32000));
+        products.add(new Product("Pain au Chocolat", 30000));
+        products.add(new Product("Cinnamon Roll", 28000));
+        products.add(new Product("Blueberry Muffin", 24000));
+        products.add(new Product("Chocolate Croissant", 31000));
+        products.add(new Product("Danish Pastry", 29000));
+        products.add(new Product("Scone", 22000));
+        products.add(new Product("Banana Bread", 26000));
+        products.add(new Product("Lemon Tart", 35000));
+        products.add(new Product("Macaron", 30000));
+        products.add(new Product("Éclair", 34000));
+        products.add(new Product("Fruit Tart", 37500));
+        products.add(new Product("Cheese Danish", 31500));
+        products.add(new Product("Butter Cookie", 18000));
 
         // initial render
         renderProducts(products);

@@ -30,21 +30,21 @@ public class PrimaryController extends BaseProductController {
     @FXML
     public void initialize() {
         // sample product list (name, price)
-        products.add(new Product("Nitro Cold Brew", 6.49));
-        products.add(new Product("Cold Brew", 5.49));
-        products.add(new Product("Iced Latte", 5.99));
-        products.add(new Product("Caffè Mocha", 5.99));
-        products.add(new Product("Caramel Latte", 6.49));
-        products.add(new Product("Matcha Latte", 6.99));
-        products.add(new Product("Vanilla Latte", 6.29));
-        products.add(new Product("Iced Coffee", 4.99));
-        products.add(new Product("Cappuccino", 4.99));
-        products.add(new Product("Chai Latte", 5.99));
-        products.add(new Product("Café Latte", 5.49));
-        products.add(new Product("Affogato", 6.49));
-        products.add(new Product("Flat White", 5.29));
-        products.add(new Product("Doppio", 4.49));
-        products.add(new Product("Classic Espresso", 3.99));
+        products.add(new Product("Nitro Cold Brew", 65000));
+        products.add(new Product("Cold Brew", 55000));
+        products.add(new Product("Iced Latte", 60000));
+        products.add(new Product("Caffè Mocha", 60000));
+        products.add(new Product("Caramel Latte", 65000));
+        products.add(new Product("Matcha Latte", 70000));
+        products.add(new Product("Vanilla Latte", 63000));
+        products.add(new Product("Iced Coffee", 50000));
+        products.add(new Product("Cappuccino", 50000));
+        products.add(new Product("Chai Latte", 60000));
+        products.add(new Product("Café Latte", 55000));
+        products.add(new Product("Affogato", 65000));
+        products.add(new Product("Flat White", 53000));
+        products.add(new Product("Doppio", 45000));
+        products.add(new Product("Classic Espresso", 40000));
 
         // initial render
         renderProducts(products);

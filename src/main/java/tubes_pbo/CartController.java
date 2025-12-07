@@ -92,7 +92,7 @@ public class CartController {
             row.setAlignment(Pos.CENTER_LEFT);
             Label name = new Label(s.name + "  x" + s.count);
             name.setPrefWidth(320);
-            Label price = new Label(String.format("$%.2f", s.price * s.count));
+            Label price = new Label(BaseProductController.formatRupiah(s.price * s.count));
             price.setStyle("-fx-font-weight:bold;");
             row.getChildren().addAll(name, price);
             listBox.getChildren().add(row);
@@ -141,7 +141,7 @@ public class CartController {
         st.setWidth(920);
         st.setHeight(600);
 
-        Label totalLabel = new Label(String.format("Total: $%.2f", total));
+        Label totalLabel = new Label("Total: " + BaseProductController.formatRupiah(total));
         totalLabel.setStyle("-fx-font-size:16px; -fx-font-weight:bold;");
 
         HBox nameRow = new HBox(8);
@@ -280,7 +280,7 @@ public class CartController {
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
 
-            Label price = new Label(String.format("$%.2f", s.price * s.count));
+            Label price = new Label(BaseProductController.formatRupiah(s.price * s.count));
             price.setStyle("-fx-font-weight:bold; -fx-font-size:18px;");
 
             row.getChildren().addAll(thumbNode, info, spacer, price);

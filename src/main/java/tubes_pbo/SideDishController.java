@@ -30,21 +30,21 @@ public class SideDishController extends BaseProductController {
     @FXML
     public void initialize() {
         // side-dish product list (name, price)
-        products.add(new Product("French Fries", 3.50));
-        products.add(new Product("Garlic Bread", 3.00));
-        products.add(new Product("Cheese Plate", 6.50));
-        products.add(new Product("Chicken Skewers", 5.99));
-        products.add(new Product("Potato Wedges", 3.75));
-        products.add(new Product("Garden Salad", 4.50));
-        products.add(new Product("Mini Sandwich", 4.99));
-        products.add(new Product("Mashed Potatoes", 4.25));
-        products.add(new Product("Nachos", 5.49));
-        products.add(new Product("Mozzarella Sticks", 4.99));
-        products.add(new Product("Onion Rings", 3.80));
-        products.add(new Product("Bruschetta", 4.20));
-        products.add(new Product("Sausage Roll", 3.60));
-        products.add(new Product("Spring Rolls", 4.10));
-        products.add(new Product("Coleslaw", 2.50));
+        products.add(new Product("French Fries", 35000));
+        products.add(new Product("Garlic Bread", 30000));
+        products.add(new Product("Cheese Plate", 65000));
+        products.add(new Product("Chicken Skewers", 60000));
+        products.add(new Product("Potato Wedges", 37500));
+        products.add(new Product("Garden Salad", 45000));
+        products.add(new Product("Mini Sandwich", 50000));
+        products.add(new Product("Mashed Potatoes", 42500));
+        products.add(new Product("Nachos", 55000));
+        products.add(new Product("Mozzarella Sticks", 50000));
+        products.add(new Product("Onion Rings", 38000));
+        products.add(new Product("Bruschetta", 42000));
+        products.add(new Product("Sausage Roll", 36000));
+        products.add(new Product("Spring Rolls", 41000));
+        products.add(new Product("Coleslaw", 25000));
 
         // initial render
         renderProducts(products);

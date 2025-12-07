@@ -71,7 +71,6 @@ public class OrderController {
         });
 
         if (addToCartBtn != null) addToCartBtn.setOnAction(e -> {
-            System.out.println("OrderController: Add to Cart clicked -> " + name + " x" + qty + " @ " + price);
             if (onAdd != null) onAdd.accept(new ProductData(name, price, qty));
             closeWindow();
         });
@@ -83,14 +82,14 @@ public class OrderController {
     }
 
     private void updatePriceLabel() {
-        if (priceLabel != null) priceLabel.setText(String.format("$%.2f", price * qty));
+        if (priceLabel != null) priceLabel.setText(BaseProductController.formatRupiah(price * qty));
     }
 
     public void setProduct(String name, double price) {
         this.name = name;
         this.price = price;
         if (titleLabel != null) titleLabel.setText(name);
-        if (priceLabel != null) priceLabel.setText(String.format("$%.2f", price * qty));
+        if (priceLabel != null) priceLabel.setText(BaseProductController.formatRupiah(price * qty));
         if (descLabel != null) descLabel.setText("Delicious " + name + " — fresh and ready.");
     }
 

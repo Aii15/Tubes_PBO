@@ -22,6 +22,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>kasir</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -66,6 +67,48 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>copy-jar-to-root</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!--
+                                  Copy fallback non-shaded jar first (if present), then overwrite with shaded jar
+                                  so the shaded (fat) jar becomes the final `OrderPoint.jar` in project root.
+                                -->
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      tofile="${project.basedir}/OrderPoint.jar" overwrite="true" failonerror="false"/>
+
+                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar"
+                                      tofile="${project.basedir}/OrderPoint.jar" overwrite="true" failonerror="false"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>OrderPoint.jar</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
             </plugin>
         </plugins>
     </build>

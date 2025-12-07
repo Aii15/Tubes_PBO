@@ -26,7 +26,7 @@ public class App extends Application {
             System.err.println("Warning: styles.css not found on classpath: " + ex.getMessage());
         }
 
-        stage.setTitle("Impactful Coffee - Catalog");
+        stage.setTitle("OrderPoint");
         stage.setScene(scene);
         // Launch maximized so window fills screen on start
         try {

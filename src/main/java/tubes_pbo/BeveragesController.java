@@ -29,21 +29,21 @@ public class BeveragesController extends BaseProductController {
     @FXML
     public void initialize() {
         // beverages product list (name, price)
-        products.add(new Product("Iced Tea", 2.99));
-        products.add(new Product("Lemonade", 2.79));
-        products.add(new Product("Hot Chocolate", 3.49));
-        products.add(new Product("Iced Matcha", 4.99));
-        products.add(new Product("Strawberry Smoothie", 4.50));
-        products.add(new Product("Mango Smoothie", 4.50));
-        products.add(new Product("Green Tea", 2.50));
-        products.add(new Product("Black Tea", 2.50));
-        products.add(new Product("Chai Tea", 3.25));
-        products.add(new Product("Herbal Infusion", 3.00));
-        products.add(new Product("Mixed Fruit Juice", 3.75));
-        products.add(new Product("Iced Chocolate", 3.95));
-        products.add(new Product("Fruit Punch", 3.20));
-        products.add(new Product("Mineral Water", 4.20));
-        products.add(new Product("Milkshake", 5.50));
+        products.add(new Product("Iced Tea", 30000));
+        products.add(new Product("Lemonade", 28000));
+        products.add(new Product("Hot Chocolate", 35000));
+        products.add(new Product("Iced Matcha", 50000));
+        products.add(new Product("Strawberry Smoothie", 45000));
+        products.add(new Product("Mango Smoothie", 45000));
+        products.add(new Product("Green Tea", 25000));
+        products.add(new Product("Black Tea", 25000));
+        products.add(new Product("Chai Tea", 32500));
+        products.add(new Product("Herbal Infusion", 30000));
+        products.add(new Product("Mixed Fruit Juice", 37500));
+        products.add(new Product("Iced Chocolate", 39500));
+        products.add(new Product("Fruit Punch", 32000));
+        products.add(new Product("Mineral Water", 42000));
+        products.add(new Product("Milkshake", 55000));
 
         // initial render
         renderProducts(products);

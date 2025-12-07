@@ -23,11 +23,9 @@
     -fx-font-size: 14px;
     -fx-text-fill: #6a4b3a;
 }
+
 .nav-button.active {
-    -fx-background-color: #8b4f2b;
     -fx-text-fill: white;
-    -fx-background-radius: 16;
-    -fx-padding: 6 14 6 14;
 }
 
 /* header right controls */
@@ -127,10 +125,12 @@
     -fx-background-radius: 20;
     -fx-padding: 8 12 8 12; /* restored original padding */
     -fx-background-color: #f6f2ef;
-    -fx-border-color: rgba(0,0,0,0.06);
-    -fx-border-width: 1;
+    /* stronger default stroke so the field is visible before focus */
+    -fx-border-color: rgba(0,0,0,0.12);
+    -fx-border-width: 1.2;
     -fx-border-radius: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);
+    -fx-padding: 8 14 8 14; /* slightly wider for visual balance */
 }
 
 /* stronger visible stroke when focused */
@@ -235,14 +235,31 @@
 }
 .footer-accept-title { -fx-padding: 8 0 6 0; -fx-font-weight: 700; }
 .accept-grid { -fx-padding: 6 0 0 0; }
-.accept-box {
-    -fx-background-color: white;
-    -fx-padding: 14 20;
-    -fx-background-radius: 6;
-    -fx-alignment: center;
+.nav .nav-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #6a4b3a;
+    -fx-padding: 6 10;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
 }
-.footer-bottom {
-    -fx-padding: 14 8 6 8;
-    -fx-border-color: transparent transparent rgba(0,0,0,0.04) transparent;
-    -fx-border-width: 1 0 0 0;
+
+.nav-button.active {
+    -fx-background-color: #8b4f2b;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 14;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(139,79,43,0.06);
+}
+
+.nav-button:focused {
+    -fx-border-color: rgba(208,123,62,0.35);
+    -fx-border-width: 1.5;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }

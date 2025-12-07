@@ -43,6 +43,13 @@ public abstract class BaseProductController {
         }
     }
 
+    // Format amount as Indonesian Rupiah without decimal fractions and with grouping
+    protected static String formatRupiah(double amount) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
+        nf.setMaximumFractionDigits(0);
+        return nf.format(amount);
+    }
+
     protected VBox createCard(Product p) {
         VBox card = new VBox(6);
         card.getStyleClass().add("product-card");
@@ -79,7 +86,7 @@ public abstract class BaseProductController {
         Label desc = new Label("Hot Drinks");
         desc.setWrapText(true);
 
-        Label price = new Label(String.format("Rp. %.2f", p.getPrice()));
+        Label price = new Label(formatRupiah(p.getPrice()));
         price.getStyleClass().add("price-label");
 
         Button add = new Button("Add to Cart");
@@ -108,19 +115,19 @@ public abstract class BaseProductController {
         Button minus = new Button("-");
         Label qtyLabel = new Label("1");
         Button plus = new Button("+");
-        Label priceLabel = new Label(String.format("$%.2f", p.getPrice()));
+        Label priceLabel = new Label(formatRupiah(p.getPrice()));
         qtyBox.getChildren().addAll(minus, qtyLabel, plus, priceLabel);
 
         final int[] qty = {1};
         minus.setOnAction(e -> {
             if (qty[0] > 1) qty[0]--;
             qtyLabel.setText(String.valueOf(qty[0]));
-            priceLabel.setText(String.format("$%.2f", p.getPrice() * qty[0]));
+            priceLabel.setText(formatRupiah(p.getPrice() * qty[0]));
         });
         plus.setOnAction(e -> {
             qty[0]++;
             qtyLabel.setText(String.valueOf(qty[0]));
-            priceLabel.setText(String.format("$%.2f", p.getPrice() * qty[0]));
+            priceLabel.setText(formatRupiah(p.getPrice() * qty[0]));
         });
 
         HBox actions = new HBox(8);
